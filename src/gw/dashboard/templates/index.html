@@ -232,6 +232,7 @@
 
     // For the Network Graph
     const NetworklineChart = new Chart(NetworkContext, network_config);
+    var EIGHT_MIN=8*60*1000;
     function getGraphInfo() {
         // Flask Python feeds javascript the content of the Database
         url = "/api/datapoint";
@@ -249,22 +250,34 @@
                 var contents = text[2];
                 // Turn the date information we get from the database into something that is more compressed together and doesn't take up as much space
                 var metric_date = new Date(text[3]);
+                var local_time = new Date();
                 // Converts the date we stored into compressed format
-                console.log("TIME: " + metric_date)
+                //console.log("TIME: " + metric_date)
                 //var date_of_collection = metric_date.getFullYear() + "-" + (metric_date.getMonth()+1) + "-" + metric_date.getDate() + " " + metric_date.getHours() + ":" + metric_date.getMinutes() + ":" + metric_date.getSeconds()
                 var date_of_collection = text[3]
-                console.log("CONVERTED TIME: " + date_of_collection)
+                //console.log("CONVERTED TIME: " + date_of_collection)
                 if (hostname === "host001") {
                     // CPU
-                    // If we've listed 8 labels already, remove the first one alongside the entry for it
-                    if (cpu_config.data.labels.length === 8) {
+                    // If we've listed 7 labels already, remove the first one alongside the entry for it
+                    if (cpu_config.data.labels.length === 7) {
                         cpu_config.data.labels.shift();
                         cpu_config.data.datasets[0].data.shift();
                     };
+                    
+                    for (var e in cpu_config.data.datasets[0].data) {
+                        console.log(cpu_config.data.datasets[0].data[e])
+                    }
+                    if (cpu_config.data.datasets[0].data.some(e => (local_time - Date(e.x) > EIGHT_MIN) === true)) {
+                        console.log("Yip YIp");
+                    } else {
+                        console.log("No Yip");
+                        console.log("Local Time: " + local_time);
+                        console.log("Metric Time: " + metric_date)
+                    };
 
-                    //if (cpu_config.data.datasets[0].length === 8) {
-                    //    cpu_config.data.datasets[0].data.shift();
-                    //};
+                    if (cpu_config.data.datasets[0].length === 7) {
+                        cpu_config.data.datasets[0].data.shift();
+                    };
 
                     if (cpu_config.data.labels.includes(date_of_collection) === false) {
                         cpu_config.data.labels.push(date_of_collection);
@@ -272,18 +285,19 @@
 
                     if (cpu_config.data.datasets[0].data.some(e => e.x == date_of_collection) === false) {
                         cpu_config.data.datasets[0].data.push({x: date_of_collection, y: contents.cpu});
-                        console.log("Awoo Adding another ENTRY!")
+                        cpu_config.data.datasets[0].data.sort((a,b) => a.x - b.x);
+                        console.log(cpu_config.data.datasets[0].data)
                         CPUlineChart.update();
                     };
 
                     // Disk
-                    // If we've listed 8 labels already, remove the first one alongside the entry for it
-                    if (disk_config.data.labels.length === 8) {
+                    // If we've listed 7 labels already, remove the first one alongside the entry for it
+                    if (disk_config.data.labels.length === 7) {
                         disk_config.data.labels.shift();
                         disk_config.data.datasets[0].data.shift();
                     };
 
-                    if (disk_config.data.datasets[0].length === 8) {
+                    if (disk_config.data.datasets[0].length === 7) {
                         disk_config.data.datasets[0].data.shift();
                     };
 
@@ -297,13 +311,13 @@
                     };
 
                     // Memory
-                    // If we've listed 8 labels already, remove the first one alongside the entry for it
-                    if (memory_config.data.labels.length === 8) {
+                    // If we've listed 7 labels already, remove the first one alongside the entry for it
+                    if (memory_config.data.labels.length === 7) {
                         memory_config.data.labels.shift();
                         memory_config.data.datasets[0].data.shift();
                     };
 
-                    if (memory_config.data.datasets[0].length === 8) {
+                    if (memory_config.data.datasets[0].length === 7) {
                         memory_config.data.datasets[0].data.shift();
                     };
 
@@ -323,13 +337,13 @@
 
                 if (hostname === "host002") {
                     // CPU
-                    // If we've listed 8 labels already, remove the first one alongside the entry for it
-                    if (cpu_config.data.labels.length === 8) {
+                    // If we've listed 7 labels already, remove the first one alongside the entry for it
+                    if (cpu_config.data.labels.length === 7) {
                         cpu_config.data.labels.shift();
                         cpu_config.data.datasets[1].data.shift();
                     };
 
-                    if (cpu_config.data.datasets[1].length === 8) {
+                    if (cpu_config.data.datasets[1].length === 7) {
                         cpu_config.data.datasets[1].data.shift();
                     };
 
@@ -343,13 +357,13 @@
                     };
                     
                     // Disk
-                    // If we've listed 8 labels already, remove the first one alongside the entry for it
-                    if (disk_config.data.labels.length === 8) {
+                    // If we've listed 7 labels already, remove the first one alongside the entry for it
+                    if (disk_config.data.labels.length === 7) {
                         disk_config.data.labels.shift();
                         disk_config.data.datasets[1].data.shift();
                     };
 
-                    if (disk_config.data.datasets[1].length === 8) {
+                    if (disk_config.data.datasets[1].length === 7) {
                         disk_config.data.datasets[1].data.shift();
                     };
 
@@ -363,13 +377,13 @@
                     };
                     
                     // Memory
-                    // If we've listed 8 labels already, remove the first one alongside the entry for it
-                    if (memory_config.data.labels.length === 8) {
+                    // If we've listed 7 labels already, remove the first one alongside the entry for it
+                    if (memory_config.data.labels.length === 7) {
                         memory_config.data.labels.shift();
                         memory_config.data.datasets[1].data.shift();
                     };
 
-                    if (memory_config.data.datasets[1].length === 8) {
+                    if (memory_config.data.datasets[1].length === 7) {
                         memory_config.data.datasets[1].data.shift();
                     };
 
@@ -389,13 +403,13 @@
 
                 if (hostname === "host003") {
                     // CPU
-                    // If we've listed 8 labels already, remove the first one alongside the entry for it
-                    if (cpu_config.data.labels.length === 8) {
+                    // If we've listed 7 labels already, remove the first one alongside the entry for it
+                    if (cpu_config.data.labels.length === 7) {
                         cpu_config.data.labels.shift();
                         cpu_config.data.datasets[2].data.shift();
                     };
 
-                    if (cpu_config.data.datasets[2].length === 8) {
+                    if (cpu_config.data.datasets[2].length === 7) {
                         cpu_config.data.datasets[2].data.shift();
                     };
 
@@ -409,13 +423,13 @@
                     };
                     
                     // Disk
-                    // If we've listed 8 labels already, remove the first one alongside the entry for it
-                    if (disk_config.data.labels.length === 8) {
+                    // If we've listed 7 labels already, remove the first one alongside the entry for it
+                    if (disk_config.data.labels.length === 7) {
                         disk_config.data.labels.shift();
                         disk_config.data.datasets[2].data.shift();
                     };
 
-                    if (disk_config.data.datasets[2].length === 8) {
+                    if (disk_config.data.datasets[2].length === 7) {
                         disk_config.data.datasets[2].data.shift();
                     };
 
@@ -429,13 +443,13 @@
                     };
                     
                     // Memory
-                    // If we've listed 8 labels already, remove the first one alongside the entry for it
-                    if (memory_config.data.labels.length === 8) {
+                    // If we've listed 7 labels already, remove the first one alongside the entry for it
+                    if (memory_config.data.labels.length === 7) {
                         memory_config.data.labels.shift();
                         memory_config.data.datasets[2].data.shift();
                     };
 
-                    if (memory_config.data.datasets[2].length === 8) {
+                    if (memory_config.data.datasets[2].length === 7) {
                         memory_config.data.datasets[2].data.shift();
                     };
 
