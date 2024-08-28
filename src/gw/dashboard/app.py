@@ -41,8 +41,5 @@ def api_datapoint():
     return jsonify({'results':results})
     #return Response(json.dumps(results),mimetype='application/json')
 
-def main():
-    application.run(host='0.0.0.0', port=5000, debug=True)
-
 if __name__ == "__main__":
-    main()
+    application.run(debug=True)

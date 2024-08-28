@@ -1,0 +1,54 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    line-height: 1.15;
+}
+
+header, footer, main, section {
+    display: block;
+}
+
+body {
+    margin: 0;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.content {
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.row div {
+    width: 50%;
+}
+
+.noMargin {
+    margin: 0px;
+}
+
+.center {
+    text-align: center;
+}
+
+.idfk {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.pbody {
+    padding: 5px;
+}
+
+table, th, td {
+    border:1px solid black;    
+}

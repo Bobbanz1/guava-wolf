@@ -7,8 +7,9 @@ from gw.reporter import metrics
 def main():
     database.connect()
     database.select("metric_db")
+    time_var = datetime.now()
     data = {
-        'timestamp': datetime.now(),
+        'timestamp': time_var.strftime("%Y-%m-%d %H:%M"),
         'hostname': socket.gethostname(),
         'metrics': metrics.get_metrics()
     }
