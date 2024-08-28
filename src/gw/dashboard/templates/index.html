@@ -7,6 +7,65 @@
 {% block content %}
 
     <div class="content">
+        <div class="row noMargin">
+            <div class="card">
+                <p class="center"><b>HOST 1: CPU</b></p>
+                <canvas id="cpu_host1"></canvas>
+            </div>
+            <div class="card">
+                <p class="center"><b>HOST 2: CPU</b></p>
+                <canvas id="cpu_host2"></canvas>
+            </div>
+            <div class="card">
+                <p class="center"><b>HOST 3: CPU</b></p>
+                <canvas id="cpu_host3"></canvas>
+            </div>
+        </div>
+        <div class="row noMargin">
+            <!--Disk-->
+            <div class="card">
+                <p class="center"><b>HOST 1: Disk</b></p>
+                <canvas id="storage_host1"></canvas>
+            </div>
+            <div class="card">
+                <p class="center"><b>HOST 2: Disk</b></p>
+                <canvas id="storage_host2"></canvas>
+            </div>
+            <div class="card">
+                <p class="center"><b>HOST 3: Disk</b></p>
+                <canvas id="storage_host3"></canvas>
+            </div>
+        </div>
+        <div class="row noMargin">
+            <!--Memory-->
+            <div class="card">
+                <p class="center"><b>HOST 1: Memory</b></p>
+                <canvas id="memory_host1"></canvas>
+            </div>
+            <div class="card">
+                <p class="center"><b>HOST 2: Memory</b></p>
+                <canvas id="memory_host2"></canvas>
+            </div>
+            <div class="card">
+                <p class="center"><b>HOST 3: Memory</b></p>
+                <canvas id="memory_host3"></canvas>
+            </div>
+            <!--Network-->
+        </div>
+        <div class="row noMargin">
+            <div class="card">
+                <p class="center"><b>HOST 1: Network</b></p>
+                <canvas id="network_host1"></canvas>
+            </div>    
+            <div class="card">
+                <p class="center"><b>HOST 2: Network</b></p>
+                <canvas id="network_host2"></canvas>
+            </div>    
+            <div class="card">
+                <p class="center"><b>HOST 3: Network</b></p>
+                <canvas id="network_host3"></canvas>
+            </div>    
+        </div>
         <table style="width:100%;">
             <tr>
                 <th>Name</th>
@@ -27,26 +86,6 @@
             </tr>
             {% endfor %}
         </table>
-        <div class="row noMargin">
-            <div class="card">
-                <p class="center"><b>CPU</b></p>
-                <canvas id="cpu"></canvas>
-            </div>
-            <div class="card">
-                <p class="center"><b>Disk</b></p>
-                <canvas id="storage"></canvas>
-            </div>
-        </div>
-        <div class="row noMargin">
-            <div class="card">
-                <p class="center"><b>Memory</b></p>
-                <canvas id="memory"></canvas>
-            </div>
-            <div class="card">
-                <p class="center"><b>Network</b></p>
-                <canvas id="network"></canvas>
-            </div>
-        </div>
     </div>
 
 {% endblock content %}
@@ -72,33 +111,63 @@
                     fill: false,
                     borderColor: 'rgb(17, 94, 217)',
                     tension: 0.1
-                },
-                {
-                    label: 'host002',
-                    data: [],
-                    fill: false,
-                    borderColor: 'rgb(127, 17, 217)',
-                    tension: 0.1
-                },
-                {
-                    label: 'host003',
-                    data: [],
-                    fill: false,
-                    borderColor: 'rgb(150, 217, 17)',
-                    tension: 0.1
-                },
+                }
             ]},
             options: {
-                events: ['click'],
-                scales: {
+                    scales: {
                     y: {
                         min: 0,
                         max: 100,
-                        stacked: true,
                     }
                 }
             }
         };
+
+    const cpu_2_config = {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [
+            {
+                label: 'host002',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(127, 17, 217)',
+                tension: 0.1
+            }
+        ]},
+        options: {
+            scales: {
+                y: {
+                    min: 0,
+                    max: 100,
+                }
+            }
+        }
+    };
+
+    const cpu_3_config = {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [
+            {
+                label: 'host003',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(150, 217, 17)',
+                tension: 0.1
+            }
+        ]},
+        options: {
+            scales: {
+                y: {
+                    min: 0,
+                    max: 100,
+                }
+            }
+        }
+    };
 
     const disk_config = {
         type: 'line',
@@ -112,28 +181,59 @@
                 borderColor: 'rgb(17, 94, 217)',
                 tension: 0.1
             },
+        ]},
+        options: {
+            scales: {
+                y: {
+                    min: 0,
+                    max: 100,
+                    stacked: true,
+                }
+            }
+        }
+    };
+
+    const disk_2_config = {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [
             {
                 label: 'host002',
                 data: [],
                 fill: false,
                 borderColor: 'rgb(127, 17, 217)',
                 tension: 0.1
-            },
+            }
+        ]},
+        options: {
+            scales: {
+                y: {
+                    min: 0,
+                    max: 100,
+                }
+            }
+        }
+    };
+
+    const disk_3_config = {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [
             {
                 label: 'host003',
                 data: [],
                 fill: false,
                 borderColor: 'rgb(150, 217, 17)',
                 tension: 0.1
-            },
+            }
         ]},
         options: {
-            events: ['click'],
             scales: {
                 y: {
                     min: 0,
                     max: 100,
-                    stacked: true,
                 }
             }
         }
@@ -150,7 +250,23 @@
                 fill: false,
                 borderColor: 'rgb(17, 94, 217)',
                 tension: 0.1
-            },
+            }
+        ]},
+        options: {
+            scales: {
+                y: {
+                    min: 0,
+                    max: 100,
+                }
+            }
+        }
+    };
+
+    const memory_2_config = {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [
             {
                 label: 'host002',
                 data: [],
@@ -158,6 +274,22 @@
                 borderColor: 'rgb(127, 17, 217)',
                 tension: 0.1
             },
+        ]},
+        options: {
+            scales: {
+                y: {
+                    min: 0,
+                    max: 100,
+                }
+            }
+        }
+    };
+
+    const memory_3_config = {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [
             {
                 label: 'host003',
                 data: [],
@@ -167,12 +299,10 @@
             },
         ]},
         options: {
-            events: ['click'],
             scales: {
                 y: {
                     min: 0,
                     max: 100,
-                    stacked: true,
                 }
             }
         }
@@ -189,50 +319,106 @@
                 fill: false,
                 borderColor: 'rgb(17, 94, 217)',
                 tension: 0.1
-            },
+            }
+        ]},
+        options: {
+            scales: {
+                y: {
+                    min: 0,
+                    max: 100,
+                }
+            }
+        }
+    };
+
+    const network_2_config = {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [
             {
                 label: 'host002',
                 data: [],
                 fill: false,
                 borderColor: 'rgb(127, 17, 217)',
                 tension: 0.1
-            },
+            }
+        ]},
+        options: {
+            scales: {
+                y: {
+                    min: 0,
+                    max: 100,
+                }
+            }
+        }
+    };
+
+    const network_3_config = {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [
             {
                 label: 'host003',
                 data: [],
                 fill: false,
                 borderColor: 'rgb(150, 217, 17)',
                 tension: 0.1
-            },
+            }
         ]},
         options: {
-            events: ['click'],
             scales: {
                 y: {
                     min: 0,
                     max: 100,
-                    stacked: true,
                 }
             }
         }
     };
-    const CPUContext = document.getElementById('cpu').getContext('2d');
-    const StorageContext = document.getElementById('storage').getContext('2d');
-    const MemoryContext = document.getElementById('memory').getContext('2d');
-    const NetworkContext = document.getElementById('network').getContext('2d');
+
+    // CPU
+    const CPU1Context = document.getElementById('cpu_host1').getContext('2d');
+    const CPU2Context = document.getElementById('cpu_host2').getContext('2d');
+    const CPU3Context = document.getElementById('cpu_host3').getContext('2d');
+
+    // Disk
+    const Storage1Context = document.getElementById('storage_host1').getContext('2d');
+    const Storage2Context = document.getElementById('storage_host2').getContext('2d');
+    const Storage3Context = document.getElementById('storage_host3').getContext('2d');
+    
+    // Memory
+    const Memory1Context = document.getElementById('memory_host1').getContext('2d');
+    const Memory2Context = document.getElementById('memory_host2').getContext('2d');
+    const Memory3Context = document.getElementById('memory_host3').getContext('2d');
+    
+    // Network
+    const Network1Context = document.getElementById('network_host1').getContext('2d');
+    const Network2Context = document.getElementById('network_host2').getContext('2d');
+    const Network3Context = document.getElementById('network_host3').getContext('2d');
 
     // For the CPU Graph
-    const CPUlineChart = new Chart(CPUContext, cpu_config);
+    const CPUlineChart = new Chart(CPU1Context, cpu_config);
+    const CPU2lineChart = new Chart(CPU2Context, cpu_2_config);
+    const CPU3lineChart = new Chart(CPU3Context, cpu_3_config);
 
     // For the Disk/Storage Graph
-    const StoragelineChart = new Chart(StorageContext, disk_config);
+    const StoragelineChart = new Chart(Storage1Context, disk_config);
+    const Storage2lineChart = new Chart(Storage2Context, disk_2_config);
+    const Storage3lineChart = new Chart(Storage3Context, disk_3_config);
 
     // For the Memory/RAM Graph
-    const MemorylineChart = new Chart(MemoryContext, memory_config);
+    const MemorylineChart = new Chart(Memory1Context, memory_config);
+    const Memory2lineChart = new Chart(Memory2Context, memory_2_config);
+    const Memory3lineChart = new Chart(Memory3Context, memory_3_config);
 
     // For the Network Graph
-    const NetworklineChart = new Chart(NetworkContext, network_config);
-    var EIGHT_MIN=8*60*1000;
+    const NetworklineChart = new Chart(Network1Context, network_config);
+    const Network2lineChart = new Chart(Network2Context, network_2_config);
+    const Network3lineChart = new Chart(Network3Context, network_3_config);
+
+    var EIGHT_MIN=7*60*1000;
+    var ONE_MIN=1*60*1000;
     function getGraphInfo() {
         // Flask Python feeds javascript the content of the Database
         url = "/api/datapoint";
@@ -252,41 +438,34 @@
                 var metric_date = new Date(text[3]);
                 var local_time = new Date();
                 // Converts the date we stored into compressed format
-                //console.log("TIME: " + metric_date)
-                //var date_of_collection = metric_date.getFullYear() + "-" + (metric_date.getMonth()+1) + "-" + metric_date.getDate() + " " + metric_date.getHours() + ":" + metric_date.getMinutes() + ":" + metric_date.getSeconds()
                 var date_of_collection = text[3]
-                //console.log("CONVERTED TIME: " + date_of_collection)
                 if (hostname === "host001") {
                     // CPU
+                    /*
+                    if (cpu_config.data.datasets[0].data.length > 0) {
+                        cpu_config.data.datasets[0].data.sort((a,b) => a.x - b.x);
+                        CPUlineChart.update();
+                    }*/
+
                     // If we've listed 7 labels already, remove the first one alongside the entry for it
                     if (cpu_config.data.labels.length === 7) {
                         cpu_config.data.labels.shift();
                         cpu_config.data.datasets[0].data.shift();
+                        CPUlineChart.update();
                     };
                     
-                    for (var e in cpu_config.data.datasets[0].data) {
-                        console.log(cpu_config.data.datasets[0].data[e])
-                    }
-                    if (cpu_config.data.datasets[0].data.some(e => (local_time - Date(e.x) > EIGHT_MIN) === true)) {
-                        console.log("Yip YIp");
-                    } else {
-                        console.log("No Yip");
-                        console.log("Local Time: " + local_time);
-                        console.log("Metric Time: " + metric_date)
-                    };
-
+                    /*
                     if (cpu_config.data.datasets[0].length === 7) {
                         cpu_config.data.datasets[0].data.shift();
-                    };
+                    }; */
 
                     if (cpu_config.data.labels.includes(date_of_collection) === false) {
                         cpu_config.data.labels.push(date_of_collection);
+                        CPUlineChart.update();
                     };
 
                     if (cpu_config.data.datasets[0].data.some(e => e.x == date_of_collection) === false) {
                         cpu_config.data.datasets[0].data.push({x: date_of_collection, y: contents.cpu});
-                        cpu_config.data.datasets[0].data.sort((a,b) => a.x - b.x);
-                        console.log(cpu_config.data.datasets[0].data)
                         CPUlineChart.update();
                     };
 
@@ -334,139 +513,156 @@
                     //config.data.datasets[0].data.push(contents.cpu);
                     //CPUlineChart.update();
                 }
-
                 if (hostname === "host002") {
                     // CPU
                     // If we've listed 7 labels already, remove the first one alongside the entry for it
-                    if (cpu_config.data.labels.length === 7) {
-                        cpu_config.data.labels.shift();
-                        cpu_config.data.datasets[1].data.shift();
-                    };
+                    /*
+                    if (cpu_2_config.data.datasets[0].data.length > 0) {
+                        cpu_2_config.data.datasets[0].data.sort((a,b) => a.x - b.x);
+                        CPU2lineChart.update();
+                    }*/
 
-                    if (cpu_config.data.datasets[1].length === 7) {
-                        cpu_config.data.datasets[1].data.shift();
+                    if (cpu_2_config.data.labels.length === 7) {
+                        cpu_2_config.data.labels.shift();
+                        cpu_2_config.data.datasets[0].data.shift();
+                        CPU2lineChart.update();
                     };
+                    /*
+                    if (cpu_2_config.data.datasets[0].length === 7) {
+                        cpu_2_config.data.datasets[0].data.shift();
+                    };*/
 
-                    if (cpu_config.data.labels.includes(date_of_collection) === false) {
-                        cpu_config.data.labels.push(date_of_collection);
+                    if (cpu_2_config.data.labels.includes(date_of_collection) === false) {
+                        cpu_2_config.data.labels.push(date_of_collection);
+                        CPU2lineChart.update();
                     };
                     
-                    if (cpu_config.data.datasets[1].data.some(e => e.x == date_of_collection) === false) {
-                        cpu_config.data.datasets[1].data.push({x: date_of_collection, y: contents.cpu});
-                        CPUlineChart.update();
+                    if (cpu_2_config.data.datasets[0].data.some(e => e.x == date_of_collection) === false) {
+                        cpu_2_config.data.datasets[0].data.push({x: date_of_collection, y: contents.cpu});
+                        CPU2lineChart.update();
                     };
-                    
                     // Disk
                     // If we've listed 7 labels already, remove the first one alongside the entry for it
-                    if (disk_config.data.labels.length === 7) {
-                        disk_config.data.labels.shift();
-                        disk_config.data.datasets[1].data.shift();
+                    if (disk_2_config.data.labels.length === 7) {
+                        disk_2_config.data.labels.shift();
+                        disk_2_config.data.datasets[0].data.shift();
                     };
 
-                    if (disk_config.data.datasets[1].length === 7) {
-                        disk_config.data.datasets[1].data.shift();
+                    if (disk_2_config.data.datasets[0].length === 7) {
+                        disk_2_config.data.datasets[0].data.shift();
                     };
 
-                    if (disk_config.data.labels.includes(date_of_collection) === false) {
-                        disk_config.data.labels.push(date_of_collection);
+                    if (disk_2_config.data.labels.includes(date_of_collection) === false) {
+                        disk_2_config.data.labels.push(date_of_collection);
                     };
 
-                    if (disk_config.data.datasets[1].data.some(e => e.x == date_of_collection) === false) {
-                        disk_config.data.datasets[1].data.push({x: date_of_collection, y: contents.disk});
-                        StoragelineChart.update();
+                    if (disk_2_config.data.datasets[0].data.some(e => e.x == date_of_collection) === false) {
+                        disk_2_config.data.datasets[0].data.push({x: date_of_collection, y: contents.disk});
+                        Storage2lineChart.update();
                     };
                     
                     // Memory
                     // If we've listed 7 labels already, remove the first one alongside the entry for it
-                    if (memory_config.data.labels.length === 7) {
-                        memory_config.data.labels.shift();
-                        memory_config.data.datasets[1].data.shift();
+                    if (memory_2_config.data.labels.length === 7) {
+                        memory_2_config.data.labels.shift();
+                        memory_2_config.data.datasets[0].data.shift();
                     };
 
-                    if (memory_config.data.datasets[1].length === 7) {
-                        memory_config.data.datasets[1].data.shift();
+                    if (memory_2_config.data.datasets[0].length === 7) {
+                        memory_2_config.data.datasets[0].data.shift();
                     };
 
-                    if (memory_config.data.labels.includes(date_of_collection) === false) {
-                        memory_config.data.labels.push(date_of_collection);
+                    if (memory_2_config.data.labels.includes(date_of_collection) === false) {
+                        memory_2_config.data.labels.push(date_of_collection);
                     };
 
-                    if (memory_config.data.datasets[1].data.some(e => e.x == date_of_collection) === false) {
-                        memory_config.data.datasets[1].data.push({x: date_of_collection, y: contents.mem});
-                        MemorylineChart.update();
+                    if (memory_2_config.data.datasets[0].data.some(e => e.x == date_of_collection) === false) {
+                        memory_2_config.data.datasets[0].data.push({x: date_of_collection, y: contents.mem});
+                        Memory2lineChart.update();
                     };
 
                     // Network
-                    //config.data.datasets[1].data.push(contents.cpu);
+                    //config.data.datasets[0].data.push(contents.cpu);
                     //NetworklineChart.update();
                 };
 
                 if (hostname === "host003") {
                     // CPU
                     // If we've listed 7 labels already, remove the first one alongside the entry for it
-                    if (cpu_config.data.labels.length === 7) {
-                        cpu_config.data.labels.shift();
-                        cpu_config.data.datasets[2].data.shift();
+                    /*
+                    if (cpu_3_config.data.datasets[0].data.length > 0) {
+                        cpu_3_config.data.datasets[0].data.sort((a,b) => a.x - b.x);
+                        CPU3lineChart.update();
+                    }*/
+
+                    if (cpu_3_config.data.labels.length === 7) {
+                        cpu_3_config.data.labels.shift();
+                        cpu_3_config.data.datasets[0].data.shift();
+                        CPU3lineChart.update();
                     };
 
-                    if (cpu_config.data.datasets[2].length === 7) {
-                        cpu_config.data.datasets[2].data.shift();
+                    if (cpu_3_config.data.datasets[0].length === 7) {
+                        cpu_3_config.data.datasets[0].data.shift();
+                        CPU3lineChart.update();
                     };
 
-                    if (cpu_config.data.labels.includes(date_of_collection) === false) {
-                        cpu_config.data.labels.push(date_of_collection);
+                    if (cpu_3_config.data.labels.includes(date_of_collection) === false) {
+                        cpu_3_config.data.labels.push(date_of_collection);
+                        CPU3lineChart.update();
                     };
 
-                    if (cpu_config.data.datasets[2].data.some(e => e.x == date_of_collection) === false) {
-                        cpu_config.data.datasets[2].data.push({x: date_of_collection, y: contents.cpu});
-                        CPUlineChart.update();
+                    if (cpu_3_config.data.datasets[0].data.some(e => e.x == date_of_collection) === false) {
+                        cpu_3_config.data.datasets[0].data.push({x: date_of_collection, y: contents.cpu});
+                        CPU3lineChart.update();
                     };
                     
                     // Disk
                     // If we've listed 7 labels already, remove the first one alongside the entry for it
-                    if (disk_config.data.labels.length === 7) {
-                        disk_config.data.labels.shift();
-                        disk_config.data.datasets[2].data.shift();
+                    if (disk_3_config.data.labels.length === 7) {
+                        disk_3_config.data.labels.shift();
+                        disk_3_config.data.datasets[0].data.shift();
                     };
 
-                    if (disk_config.data.datasets[2].length === 7) {
-                        disk_config.data.datasets[2].data.shift();
+                    if (disk_3_config.data.datasets[0].length === 7) {
+                        disk_3_config.data.datasets[0].data.shift();
                     };
 
-                    if (disk_config.data.labels.includes(date_of_collection) === false) {
-                        disk_config.data.labels.push(date_of_collection);
+                    if (disk_3_config.data.labels.includes(date_of_collection) === false) {
+                        disk_3_config.data.labels.push(date_of_collection);
                     };
 
-                    if (disk_config.data.datasets[2].data.some(e => e.x == date_of_collection) === false) {
-                        disk_config.data.datasets[2].data.push({x: date_of_collection, y: contents.disk});
-                        StoragelineChart.update();
+                    if (disk_3_config.data.datasets[0].data.some(e => e.x == date_of_collection) === false) {
+                        disk_3_config.data.datasets[0].data.push({x: date_of_collection, y: contents.disk});
+                        Storage3lineChart.update();
                     };
                     
                     // Memory
                     // If we've listed 7 labels already, remove the first one alongside the entry for it
-                    if (memory_config.data.labels.length === 7) {
-                        memory_config.data.labels.shift();
-                        memory_config.data.datasets[2].data.shift();
+                    if (memory_3_config.data.labels.length === 7) {
+                        memory_3_config.data.labels.shift();
+                        memory_3_config.data.datasets[0].data.shift();
                     };
 
-                    if (memory_config.data.datasets[2].length === 7) {
-                        memory_config.data.datasets[2].data.shift();
+                    if (memory_3_config.data.datasets[0].length === 7) {
+                        memory_3_config.data.datasets[0].data.shift();
                     };
 
-                    if (memory_config.data.labels.includes(date_of_collection) === false) {
-                        memory_config.data.labels.push(date_of_collection);
+                    if (memory_3_config.data.labels.includes(date_of_collection) === false) {
+                        memory_3_config.data.labels.push(date_of_collection);
                     };
 
-                    if (memory_config.data.datasets[2].data.some(e => e.x == date_of_collection) === false) {
-                        memory_config.data.datasets[2].data.push({x: date_of_collection, y: contents.mem});
-                        MemorylineChart.update();
+                    if (memory_3_config.data.datasets[0].data.some(e => e.x == date_of_collection) === false) {
+                        memory_3_config.data.datasets[0].data.push({x: date_of_collection, y: contents.mem});
+                        Memory3lineChart.update();
                     };
 
                     // Network
-                    //config.data.datasets[1].data.push(contents.cpu);
+                    //config.data.datasets[0].data.push(contents.cpu);
                     //NetworklineChart.update();
-                }
+                };
+                // tetstst
             }
+            
             //for (let x in dataset_data) {
             //    config.data.labels.push(dataset_data[x]);
             //    lineChart.update();
@@ -478,7 +674,7 @@
         
     };
 
-    var intervalID = window.setInterval(getGraphInfo, 10000)
+    var intervalID = window.setInterval(getGraphInfo, ONE_MIN)
 
 </script>
 
