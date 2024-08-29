@@ -39,16 +39,18 @@ body {
     text-align: center;
 }
 
-.idfk {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-}
-
-.pbody {
-    padding: 5px;
-}
-
 table, th, td {
     border:1px solid black;    
+}
+
+.host001 {
+    background-color: rgb(17, 94, 217);
+}
+
+.host002 {
+    background-color: rgb(127, 17, 217);
+}
+
+.host003 {
+    background-color: rgb(150, 217, 17);
 }

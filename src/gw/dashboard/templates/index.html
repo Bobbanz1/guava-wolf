@@ -66,25 +66,21 @@
                 <canvas id="network_host3"></canvas>
             </div>    
         </div>
-        <table style="width:100%;">
-            <tr>
-                <th>Name</th>
-                <th>Date</th>
-                <th>CPU</th>
-                <th>Disk</th>
-                <th>RAM</th>
-                <th>Bytes Recieved</th>
-                <th>Bytes Sent</th>
-            </tr>
-            {% for stuff in things %}
-            <tr>
-                <td><b>{{ stuff.hostname }}</b></td>
-                <td>{{ stuff.timestamp }}</td>
-                {% for key, value in stuff.metrics.items() %}
-                    <td>{{ value }}</td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
+        <table id="tab" class="hover" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>CPU</th>
+                    <th>Disk</th>
+                    <th>RAM</th>
+                    <th>Bytes Recieved</th>
+                    <th>Bytes Sent</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
         </table>
     </div>
 
@@ -417,6 +413,10 @@
     const Network2lineChart = new Chart(Network2Context, network_2_config);
     const Network3lineChart = new Chart(Network3Context, network_3_config);
 
+    // For the DataTables
+    const table = new DataTable('#tab');
+
+    // Time Defines
     var EIGHT_MIN=7*60*1000;
     var ONE_MIN=1*60*1000;
     function getGraphInfo() {
@@ -439,6 +439,18 @@
                 var local_time = new Date();
                 // Converts the date we stored into compressed format
                 var date_of_collection = text[3]
+
+                // To update the table with the latest info
+                table.row.add([
+                    hostname,
+                    date_of_collection,
+                    contents.cpu + '%',
+                    contents.disk + '%',
+                    contents.mem + '%',
+                    contents.bytes_recv,
+                    contents.bytes_sent
+                ]).draw(false);
+
                 if (hostname === "host001") {
                     // CPU
                     /*
