@@ -440,17 +440,6 @@
                 // Converts the date we stored into compressed format
                 var date_of_collection = text[3]
 
-                // To update the table with the latest info
-                table.row.add([
-                    hostname,
-                    date_of_collection,
-                    contents.cpu + '%',
-                    contents.disk + '%',
-                    contents.mem + '%',
-                    contents.bytes_recv,
-                    contents.bytes_sent
-                ]).draw(false);
-
                 if (hostname === "host001") {
                     // CPU
                     /*
@@ -473,6 +462,16 @@
 
                     if (cpu_config.data.labels.includes(date_of_collection) === false) {
                         cpu_config.data.labels.push(date_of_collection);
+                        // To update the table with the latest info
+                        table.row.add([
+                            hostname,
+                            date_of_collection,
+                            contents.cpu + '%',
+                            contents.disk + '%',
+                            contents.mem + '%',
+                            contents.bytes_recv,
+                            contents.bytes_sent
+                        ]).draw(false);
                         CPUlineChart.update();
                     };
 
@@ -546,6 +545,16 @@
 
                     if (cpu_2_config.data.labels.includes(date_of_collection) === false) {
                         cpu_2_config.data.labels.push(date_of_collection);
+                        // To update the table with the latest info
+                        table.row.add([
+                            hostname,
+                            date_of_collection,
+                            contents.cpu + '%',
+                            contents.disk + '%',
+                            contents.mem + '%',
+                            contents.bytes_recv,
+                            contents.bytes_sent
+                        ]).draw(false);
                         CPU2lineChart.update();
                     };
                     
@@ -620,6 +629,16 @@
 
                     if (cpu_3_config.data.labels.includes(date_of_collection) === false) {
                         cpu_3_config.data.labels.push(date_of_collection);
+                        // To update the table with the latest info
+                        table.row.add([
+                            hostname,
+                            date_of_collection,
+                            contents.cpu + '%',
+                            contents.disk + '%',
+                            contents.mem + '%',
+                            contents.bytes_recv,
+                            contents.bytes_sent
+                        ]).draw(false);
                         CPU3lineChart.update();
                     };
 
